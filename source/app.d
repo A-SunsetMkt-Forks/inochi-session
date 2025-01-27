@@ -18,7 +18,7 @@ import session.scene;
 import session.framesend;
 import session.tracking.expr;
 import std.process;
-
+import i18n.culture : i18nSetLocale;
 
 void main(string[] args) {
     insLogInfo("Inochi Session %s, args=%s", INS_VERSION, args[1..$]);
@@ -30,6 +30,9 @@ void main(string[] args) {
         "Inochi Session"                // Human-readable name
     );
     inSetApplication(appInfo);
+
+    // Force C locale due to imgui removing support for setting decimal separator.
+    i18nSetLocale("C");
 
     // Initialize Lua
     insLuaInit();
